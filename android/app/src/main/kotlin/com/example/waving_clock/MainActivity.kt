@@ -1,4 +1,4 @@
-package com.example.waving_clock
+package rsr.waving.clock
 
 import io.flutter.embedding.android.FlutterActivity
 
