@@ -40,11 +40,20 @@ class _WavingClockState extends State<WavingClock> {
             ),
             ListTile(
               title: Text('24 Hour Format'),
-              trailing: Switch(
+              trailing: Checkbox(
                   value: widget._settings.is24HourFormat,
                   onChanged: (val) {
                     widget._settings.is24HourFormat = val;
                   }),
+            ),
+            ListTile(
+              enabled: !widget._settings.is24HourFormat,
+              title: Text('Show AM/PM'),
+              trailing: Checkbox(
+                  value: widget._settings.showAmPm,
+                  onChanged: widget._settings.is24HourFormat
+                      ? null
+                      : (val) => widget._settings.showAmPm = val),
             ),
             ListTile(
               title: Text('Theme'),
