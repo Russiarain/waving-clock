@@ -56,6 +56,14 @@ class _WavingClockState extends State<WavingClock> {
                       : (val) => widget._settings.showAmPm = val),
             ),
             ListTile(
+              title: Text('Show time delimiter'),
+              trailing: Checkbox(
+                value: widget._settings.showTimeDelimiter,
+                onChanged: (value) =>
+                    widget._settings.showTimeDelimiter = value,
+              ),
+            ),
+            ListTile(
               title: Text('Theme'),
               trailing: DropdownButtonHideUnderline(
                   child: DropdownButton<ClockTheme>(
