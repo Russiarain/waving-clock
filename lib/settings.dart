@@ -5,11 +5,13 @@ class ClockSettings extends ChangeNotifier {
   static const k24HourFormat = '6504559c-3f1f-4cb6-98df-96ed08a45173';
   static const kClockTheme = 'ba1764af-07d4-4228-b8a3-43261e0b341e';
 
+  ClockSettings(this._preferences);
+
   SharedPreferences _preferences;
   bool _is24HourFormat;
   int _clockTheme;
-  void initSettings() async {
-    _preferences = await SharedPreferences.getInstance();
+
+  void initSettings() {
     _is24HourFormat = _preferences.getBool(k24HourFormat) ?? true;
     _clockTheme = _preferences.getInt(kClockTheme) ?? 0;
   }
