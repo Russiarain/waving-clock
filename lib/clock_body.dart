@@ -75,10 +75,14 @@ class _ClockBodyState extends State<ClockBody> {
         (screenSize.width * _dateTime.second / 59).floorToDouble();
     return Stack(
       children: [
-        Positioned.fill(child: AnimatedBackgroud(kThemeof[ClockTheme.blue])),
-        waveLayer(waveHeight, 0, kThemeof[ClockTheme.blue].waveColor),
-        waveLayer(waveHeight, 0.33 * pi, kThemeof[ClockTheme.blue].waveColor),
-        waveLayer(waveHeight, 0.66 * pi, kThemeof[ClockTheme.blue].waveColor),
+        Positioned.fill(
+            child: AnimatedBackgroud(kThemeof[widget.settings.clockTheme])),
+        waveLayer(
+            waveHeight, 0, kThemeof[widget.settings.clockTheme].waveColor),
+        waveLayer(waveHeight, 0.33 * pi,
+            kThemeof[widget.settings.clockTheme].waveColor),
+        waveLayer(waveHeight, 0.66 * pi,
+            kThemeof[widget.settings.clockTheme].waveColor),
         TimeLayer(
             _dateTime, widget.settings, kThemeof[ClockTheme.blue].fontColor),
         DateLayer(_dateTime, kThemeof[ClockTheme.blue].fontColor)

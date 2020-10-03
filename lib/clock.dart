@@ -120,7 +120,17 @@ class _WavingClockState extends State<WavingClock> {
                         color: Colors.black38,
                       ),
                       onPressed: () {
-                        print('quit button tapped');
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          content: Text('Exit Waving Clock ?'),
+                          duration: Duration(seconds: 2),
+                          behavior: SnackBarBehavior.floating,
+                          action: SnackBarAction(
+                              label: 'Yes',
+                              onPressed: () {
+                                SystemNavigator.pop();
+                                //print('Quit app');
+                              }),
+                        ));
                       })),
             ),
             Visibility(
@@ -129,7 +139,10 @@ class _WavingClockState extends State<WavingClock> {
                     top: 4,
                     right: 4,
                     child: IconButton(
-                        icon: Icon(Icons.chevron_left_outlined),
+                        icon: Icon(
+                          Icons.chevron_left_outlined,
+                          color: Colors.black38,
+                        ),
                         onPressed: () {
                           _scaffoldKey.currentState.openEndDrawer();
                           setState(() => _showButtons = false);
