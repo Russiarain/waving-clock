@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:waving_clock/components/background.dart';
+import 'package:waving_clock/components/time.dart';
 import 'package:waving_clock/settings.dart';
 import 'package:waving_clock/theme.dart';
 
@@ -78,6 +79,9 @@ class _ClockBodyState extends State<ClockBody> {
         waveLayer(waveHeight, 0, kThemeof[ClockTheme.blue].waveColor),
         waveLayer(waveHeight, 0.33 * pi, kThemeof[ClockTheme.blue].waveColor),
         waveLayer(waveHeight, 0.66 * pi, kThemeof[ClockTheme.blue].waveColor),
+        TimeLayer(
+            _dateTime, widget.settings, kThemeof[ClockTheme.blue].fontColor),
+        DateLayer(_dateTime, kThemeof[ClockTheme.blue].fontColor)
       ],
     );
   }
