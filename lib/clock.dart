@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:wakelock/wakelock.dart';
-import 'package:waving_clock/settings.dart';
+
+import 'clock_body.dart';
+import 'settings.dart';
+import 'theme.dart';
 
 class WavingClock extends StatefulWidget {
   final ClockSettings _settings;
@@ -12,6 +15,9 @@ class WavingClock extends StatefulWidget {
 }
 
 class _WavingClockState extends State<WavingClock> {
+  bool _showButtons = false;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -93,10 +99,46 @@ class _WavingClockState extends State<WavingClock> {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     return Scaffold(
-      body: Center(
-        child: Text('Body'),
+      key: _scaffoldKey,
+      body: SafeArea(
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _showButtons = !_showButtons;
+            });
+          },
+          child: Stack(children: [
+            ClockBody(widget._settings),
+            Visibility(
+              visible: _showButtons,
+              child: Positioned(
+                  top: 4,
+                  left: 4,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.power_settings_new,
+                        color: Colors.black38,
+                      ),
+                      onPressed: () {
+                        print('quit button tapped');
+                      })),
+            ),
+            Visibility(
+                visible: _showButtons,
+                child: Positioned(
+                    top: 4,
+                    right: 4,
+                    child: IconButton(
+                        icon: Icon(Icons.chevron_left_outlined),
+                        onPressed: () {
+                          _scaffoldKey.currentState.openEndDrawer();
+                          setState(() => _showButtons = false);
+                        })))
+          ]),
+        ),
       ),
       endDrawer: _buildDrader(context),
+      endDrawerEnableOpenDragGesture: false,
     );
   }
 }

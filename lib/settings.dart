@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'theme.dart';
 
 class ClockSettings extends ChangeNotifier {
   static const k24HourFormat = '6504559c-3f1f-4cb6-98df-96ed08a45173';
@@ -59,5 +60,3 @@ class ClockSettings extends ChangeNotifier {
     }
   }
 }
-
-enum ClockTheme { dark, blue, orange, pink }
