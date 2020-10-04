@@ -23,6 +23,7 @@ class _ClockBodyState extends State<ClockBody> {
   bool _is24HourFormat;
   bool _showTimeDelimiter;
   bool _showAmPm;
+  ClockTheme _theme;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _ClockBodyState extends State<ClockBody> {
     _is24HourFormat = widget.settings.is24HourFormat;
     _showTimeDelimiter = widget.settings.showTimeDelimiter;
     _showAmPm = widget.settings.showAmPm;
+    _theme = widget.settings.clockTheme;
 
     widget.settings.addListener(_updateSettings);
     _updateTime();
@@ -56,6 +58,7 @@ class _ClockBodyState extends State<ClockBody> {
     _is24HourFormat = widget.settings.is24HourFormat;
     _showTimeDelimiter = widget.settings.showTimeDelimiter;
     _showAmPm = widget.settings.showAmPm;
+    _theme = widget.settings.clockTheme;
   }
 
   void _updateTime() {
@@ -75,17 +78,13 @@ class _ClockBodyState extends State<ClockBody> {
         (screenSize.width * _dateTime.second / 59).floorToDouble();
     return Stack(
       children: [
-        Positioned.fill(
-            child: AnimatedBackgroud(kThemeof[widget.settings.clockTheme])),
-        waveLayer(
-            waveHeight, 0, kThemeof[widget.settings.clockTheme].waveColor),
-        waveLayer(waveHeight, 0.33 * pi,
-            kThemeof[widget.settings.clockTheme].waveColor),
-        waveLayer(waveHeight, 0.66 * pi,
-            kThemeof[widget.settings.clockTheme].waveColor),
-        TimeLayer(
-            _dateTime, widget.settings, kThemeof[ClockTheme.blue].fontColor),
-        DateLayer(_dateTime, kThemeof[ClockTheme.blue].fontColor)
+        Positioned.fill(child: AnimatedBackgroud(kThemeof[_theme])),
+        waveLayer(waveHeight, 0, kThemeof[_theme].waveColor),
+        waveLayer(waveHeight, 0.33 * pi, kThemeof[_theme].waveColor),
+        waveLayer(waveHeight, 0.66 * pi, kThemeof[_theme].waveColor),
+        TimeLayer(_dateTime, kThemeof[_theme].fontColor, _showTimeDelimiter,
+            _is24HourFormat, _showAmPm),
+        DateLayer(_dateTime, kThemeof[_theme].fontColor)
       ],
     );
   }

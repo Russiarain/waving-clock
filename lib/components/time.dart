@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:waving_clock/settings.dart';
 import 'package:intl/intl.dart';
 
 class TimeLayer extends StatelessWidget {
   final DateTime _time;
   final Color _fontColor;
-  final ClockSettings _settings;
-  TimeLayer(this._time, this._settings, this._fontColor);
+  final bool _showTimeDelimiter;
+  final bool _is24HourFormat;
+  final bool _showAmPm;
+  TimeLayer(this._time, this._fontColor, this._showTimeDelimiter,
+      this._is24HourFormat, this._showAmPm);
   String _getTimeString() {
-    if (_settings.is24HourFormat) {
-      return DateFormat(_settings.showTimeDelimiter ? 'HH:mm' : 'HH mm')
-          .format(_time);
+    if (_is24HourFormat) {
+      return DateFormat(_showTimeDelimiter ? 'HH:mm' : 'HH mm').format(_time);
     } else {
-      if (_settings.showAmPm) {
-        return DateFormat(_settings.showTimeDelimiter ? 'hh:mm a' : 'hh mm a')
+      if (_showAmPm) {
+        return DateFormat(_showTimeDelimiter ? 'hh:mm a' : 'hh mm a')
             .format(_time);
       } else {
-        return DateFormat(_settings.showTimeDelimiter ? 'hh:mm' : 'hh mm')
-            .format(_time);
+        return DateFormat(_showTimeDelimiter ? 'hh:mm' : 'hh mm').format(_time);
       }
     }
   }
@@ -37,9 +37,7 @@ class TimeLayer extends StatelessWidget {
             style: GoogleFonts.lato(
                 fontSize: fontSize,
                 color: _fontColor,
-                fontWeight: FontWeight.bold)
-            //TextStyle(fontSize: fontSize, color: _fontColor)
-            ),
+                fontWeight: FontWeight.bold)),
       ),
     );
   }
@@ -66,9 +64,7 @@ class DateLayer extends StatelessWidget {
             style: GoogleFonts.lato(
                 fontSize: fontSize,
                 color: _fontColor,
-                fontWeight: FontWeight.bold)
-            //TextStyle(fontSize: fontSize, color: _fontColor)
-            ),
+                fontWeight: FontWeight.bold)),
       ),
     );
   }
