@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum ClockTheme { dark, teal, orange, blue }
 
@@ -61,3 +62,10 @@ WavingTheme _buildBlueTheme() {
       waveColor: Color(0x806cccff),
       fontColor: Colors.white60);
 }
+
+final lightTheme = ThemeData(
+    disabledColor: Colors.grey,
+    textTheme: TextTheme(
+        headline6: GoogleFonts.lato(fontSize: 22, fontWeight: FontWeight.w800),
+        bodyText1:
+            GoogleFonts.lato(fontSize: 18, fontWeight: FontWeight.bold)));

@@ -7,8 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Waving Clock"
-        android:icon="@mipmap/ic_launcher">
+        android:label="WClock"
+        android:icon="@mipmap/ic_wc">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -41,11 +41,18 @@ class _WavingClockState extends State<WavingClock> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ListTile(
-              title: Text('Settings'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Text(
+                'Settings',
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ),
             ListTile(
-              title: Text('24 Hour Format'),
+              title: Text(
+                '24 Hour Format',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               trailing: Checkbox(
                   value: widget._settings.is24HourFormat,
                   onChanged: (val) {
@@ -54,7 +61,10 @@ class _WavingClockState extends State<WavingClock> {
             ),
             ListTile(
               enabled: !widget._settings.is24HourFormat,
-              title: Text('Show AM/PM'),
+              title: Text(
+                'Show AM/PM',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               trailing: Checkbox(
                   value: widget._settings.showAmPm,
                   onChanged: widget._settings.is24HourFormat
@@ -62,7 +72,10 @@ class _WavingClockState extends State<WavingClock> {
                       : (val) => widget._settings.showAmPm = val),
             ),
             ListTile(
-              title: Text('Show time delimiter'),
+              title: Text(
+                'Show time delimiter',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               trailing: Checkbox(
                 value: widget._settings.showTimeDelimiter,
                 onChanged: (value) =>
@@ -70,14 +83,21 @@ class _WavingClockState extends State<WavingClock> {
               ),
             ),
             ListTile(
-              title: Text('Theme'),
+              title: Text(
+                'Theme',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
               trailing: DropdownButtonHideUnderline(
                   child: DropdownButton<ClockTheme>(
                       value: widget._settings.clockTheme,
                       isDense: true,
                       items: ClockTheme.values
                           .map((e) => DropdownMenuItem<ClockTheme>(
-                              value: e, child: Text(getEnumSubString(e))))
+                              value: e,
+                              child: Text(
+                                getEnumSubString(e),
+                                style: Theme.of(context).textTheme.bodyText1,
+                              )))
                           .toList(),
                       onChanged: (theme) {
                         widget._settings.clockTheme = theme;

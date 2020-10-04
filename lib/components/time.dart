@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:waving_clock/settings.dart';
 import 'package:intl/intl.dart';
 
@@ -33,7 +34,12 @@ class TimeLayer extends StatelessWidget {
       right: 4,
       child: Center(
         child: Text(_getTimeString(),
-            style: TextStyle(fontSize: fontSize, color: _fontColor)),
+            style: GoogleFonts.lato(
+                fontSize: fontSize,
+                color: _fontColor,
+                fontWeight: FontWeight.bold)
+            //TextStyle(fontSize: fontSize, color: _fontColor)
+            ),
       ),
     );
   }
@@ -57,7 +63,12 @@ class DateLayer extends StatelessWidget {
       right: 4,
       child: Center(
         child: Text(_getTimeString(),
-            style: TextStyle(fontSize: fontSize, color: _fontColor)),
+            style: GoogleFonts.lato(
+                fontSize: fontSize,
+                color: _fontColor,
+                fontWeight: FontWeight.bold)
+            //TextStyle(fontSize: fontSize, color: _fontColor)
+            ),
       ),
     );
   }
