@@ -18,7 +18,7 @@ class ClockSettings extends ChangeNotifier {
 
   void initSettings() {
     _is24HourFormat = _preferences.getBool(k24HourFormat) ?? true;
-    _clockTheme = _preferences.getInt(kClockTheme) ?? 0;
+    _clockTheme = _preferences.getInt(kClockTheme) ?? 3;
     _showAmPm = _preferences.getBool(kShowAmPm) ?? false;
     _showTimeDelimiter = _preferences.getBool(kShowTimeDelimiter) ?? true;
   }
