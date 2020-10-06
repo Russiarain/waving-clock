@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:wakelock/wakelock.dart';
 
@@ -102,6 +103,18 @@ class _WavingClockState extends State<WavingClock> {
                       onChanged: (theme) {
                         widget._settings.clockTheme = theme;
                       })),
+            ),
+            ListTile(
+              title: Text('View source code'),
+              trailing: Icon(Icons.open_in_new_rounded),
+              onTap: () async {
+                final url = 'https://github.com/Russiarain/waving-clock';
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  print('Link to Github failed');
+                }
+              },
             )
           ],
         ),
