@@ -51,7 +51,7 @@ class _WavingClockState extends State<WavingClock> {
             ListTile(
               title: Text(
                 '24 Hour Format',
-                style: Theme.of(context).textTheme.bodyText1,
+                //style: Theme.of(context).textTheme.bodyText1,
               ),
               trailing: Checkbox(
                   value: widget._settings.is24HourFormat,
@@ -63,7 +63,7 @@ class _WavingClockState extends State<WavingClock> {
               enabled: !widget._settings.is24HourFormat,
               title: Text(
                 'Show AM/PM',
-                style: Theme.of(context).textTheme.bodyText1,
+                //style: Theme.of(context).textTheme.bodyText1,
               ),
               trailing: Checkbox(
                   value: widget._settings.showAmPm,
@@ -74,7 +74,7 @@ class _WavingClockState extends State<WavingClock> {
             ListTile(
               title: Text(
                 'Show time delimiter',
-                style: Theme.of(context).textTheme.bodyText1,
+                //style: Theme.of(context).textTheme.bodyText1,
               ),
               trailing: Checkbox(
                 value: widget._settings.showTimeDelimiter,
@@ -85,7 +85,7 @@ class _WavingClockState extends State<WavingClock> {
             ListTile(
               title: Text(
                 'Theme',
-                style: Theme.of(context).textTheme.bodyText1,
+                //style: Theme.of(context).textTheme.bodyText1,
               ),
               trailing: DropdownButtonHideUnderline(
                   child: DropdownButton<ClockTheme>(
