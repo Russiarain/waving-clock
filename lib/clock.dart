@@ -153,7 +153,7 @@ class _WavingClockState extends State<WavingClock> {
                         color: Colors.black38,
                       ),
                       onPressed: () {
-                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Exit Waving Clock ?'),
                           duration: Duration(seconds: 2),
                           behavior: SnackBarBehavior.floating,
