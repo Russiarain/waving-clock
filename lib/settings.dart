@@ -11,10 +11,10 @@ class ClockSettings extends ChangeNotifier {
   ClockSettings(this._preferences);
 
   SharedPreferences _preferences;
-  bool _is24HourFormat;
-  int _clockTheme;
-  bool _showAmPm;
-  bool _showTimeDelimiter;
+  late bool _is24HourFormat;
+  late int _clockTheme;
+  late bool _showAmPm;
+  late bool _showTimeDelimiter;
 
   void initSettings() {
     _is24HourFormat = _preferences.getBool(k24HourFormat) ?? true;

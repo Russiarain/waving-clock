@@ -18,12 +18,12 @@ class ClockBody extends StatefulWidget {
 
 class _ClockBodyState extends State<ClockBody> {
   DateTime _dateTime = DateTime.now();
-  Timer _timer;
+  late Timer _timer;
 
-  bool _is24HourFormat;
-  bool _showTimeDelimiter;
-  bool _showAmPm;
-  ClockTheme _theme;
+  late bool _is24HourFormat;
+  late bool _showTimeDelimiter;
+  late bool _showAmPm;
+  late ClockTheme _theme;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _ClockBodyState extends State<ClockBody> {
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timer.cancel();
     widget.settings.removeListener(_updateSettings);
     widget.settings.dispose();
     super.dispose();
@@ -78,13 +78,13 @@ class _ClockBodyState extends State<ClockBody> {
         (screenSize.width * _dateTime.second / 59).floorToDouble();
     return Stack(
       children: [
-        Positioned.fill(child: AnimatedBackgroud(kThemeof[_theme])),
-        waveLayer(waveHeight, 0, kThemeof[_theme].waveColor),
-        waveLayer(waveHeight, 0.33 * pi, kThemeof[_theme].waveColor),
-        waveLayer(waveHeight, 0.66 * pi, kThemeof[_theme].waveColor),
-        TimeLayer(_dateTime, kThemeof[_theme].fontColor, _showTimeDelimiter,
+        Positioned.fill(child: AnimatedBackgroud(kThemeof[_theme]!)),
+        waveLayer(waveHeight, 0, kThemeof[_theme]!.waveColor),
+        waveLayer(waveHeight, 0.33 * pi, kThemeof[_theme]!.waveColor),
+        waveLayer(waveHeight, 0.66 * pi, kThemeof[_theme]!.waveColor),
+        TimeLayer(_dateTime, kThemeof[_theme]!.fontColor, _showTimeDelimiter,
             _is24HourFormat, _showAmPm),
-        DateLayer(_dateTime, kThemeof[_theme].fontColor)
+        DateLayer(_dateTime, kThemeof[_theme]!.fontColor)
       ],
     );
   }

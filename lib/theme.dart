@@ -16,10 +16,10 @@ class WavingTheme {
   final Color fontColor;
 
   WavingTheme(
-      {this.backgroundTop,
-      this.backgroudBottom,
-      this.waveColor,
-      this.fontColor});
+      {required this.backgroundTop,
+      required this.backgroudBottom,
+      required this.waveColor,
+      required this.fontColor});
 }
 
 WavingTheme _buildTealTheme() {
@@ -48,7 +48,7 @@ WavingTheme _buildDarkTheme() {
           ColorTween(begin: Color(0xff37474f), end: Color(0xff212121)),
       backgroudBottom:
           ColorTween(begin: Color(0xff212121), end: Color(0xff37474f)),
-      waveColor: Colors.blueGrey[600].withAlpha(48),
+      waveColor: Color(0xFF546E7A).withAlpha(48),
       fontColor: Colors.white54);
 }
 
