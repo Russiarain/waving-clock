@@ -57,7 +57,7 @@ class _WavingClockState extends State<WavingClock> {
               trailing: Checkbox(
                   value: widget._settings.is24HourFormat,
                   onChanged: (val) {
-                    widget._settings.is24HourFormat = val;
+                    widget._settings.is24HourFormat = val!;
                   }),
             ),
             ListTile(
@@ -70,7 +70,7 @@ class _WavingClockState extends State<WavingClock> {
                   value: widget._settings.showAmPm,
                   onChanged: widget._settings.is24HourFormat
                       ? null
-                      : (val) => widget._settings.showAmPm = val),
+                      : (val) => widget._settings.showAmPm = val!),
             ),
             ListTile(
               title: Text(
@@ -80,7 +80,7 @@ class _WavingClockState extends State<WavingClock> {
               trailing: Checkbox(
                 value: widget._settings.showTimeDelimiter,
                 onChanged: (value) =>
-                    widget._settings.showTimeDelimiter = value,
+                    widget._settings.showTimeDelimiter = value!,
               ),
             ),
             ListTile(
@@ -101,7 +101,7 @@ class _WavingClockState extends State<WavingClock> {
                               )))
                           .toList(),
                       onChanged: (theme) {
-                        widget._settings.clockTheme = theme;
+                        widget._settings.clockTheme = theme!;
                       })),
             ),
             ListTile(
@@ -153,7 +153,7 @@ class _WavingClockState extends State<WavingClock> {
                         color: Colors.black38,
                       ),
                       onPressed: () {
-                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Exit Waving Clock ?'),
                           duration: Duration(seconds: 2),
                           behavior: SnackBarBehavior.floating,
@@ -177,7 +177,7 @@ class _WavingClockState extends State<WavingClock> {
                           color: Colors.black38,
                         ),
                         onPressed: () {
-                          _scaffoldKey.currentState.openEndDrawer();
+                          _scaffoldKey.currentState!.openEndDrawer();
                           setState(() => _showButtons = false);
                         })))
           ]),

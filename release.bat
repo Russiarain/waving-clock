@@ -1,1 +1,1 @@
-flutter build apk --target-platform android-arm64 --analyze-size
+flutter build apk --split-per-abi

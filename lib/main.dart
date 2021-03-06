@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder(
+      home: FutureBuilder<SharedPreferences>(
         future: _getPreference(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return WavingClock(ClockSettings(snapshot.data)..initSettings());
+            return WavingClock(ClockSettings(snapshot.data!)..initSettings());
           }
           return Container(
               color: Colors.blueGrey[200],

@@ -22,7 +22,7 @@ class SineWave extends StatelessWidget {
   final double offset;
   final Color waveColor;
 
-  SineWave({this.height, this.speed = 1.0, this.waveColor, this.offset = 0.0});
+  SineWave({required this.height, this.speed = 1.0, required this.waveColor, this.offset = 0.0});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class SineWave extends StatelessWidget {
           child: LoopAnimation(
             duration: Duration(milliseconds: (5000 / speed).round()),
             tween: Tween(begin: 0.0, end: 2 * pi),
-            builder: (contest, _, value) {
+            builder: (contest, _, dynamic value) {
               return CustomPaint(
                 foregroundPainter:
                     SineCurvePainter(value + offset, areaColor: waveColor),
@@ -53,7 +53,7 @@ class SineCurvePainter extends CustomPainter {
   final double sineX;
   final Color areaColor;
 
-  SineCurvePainter(this.sineX, {this.areaColor});
+  SineCurvePainter(this.sineX, {required this.areaColor});
 
   @override
   void paint(Canvas canvas, Size size) {
