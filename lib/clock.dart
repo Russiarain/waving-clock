@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -122,66 +124,85 @@ class _WavingClockState extends State<WavingClock> {
     ));
   }
 
+  Widget _buildButtonLayer(double btnSize) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(Icons.power_settings_new_rounded),
+                iconSize: btnSize,
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+              Text('Quit')
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: Icon(Icons.settings),
+                iconSize: btnSize,
+                onPressed: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                  setState(() => _showButtons = false);
+                },
+              ),
+              Text('Settings')
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // app only works in landscape mode
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    //SystemChrome.setPreferredOrientations(
+    //    [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
 
     // hide status bar and bottom bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
+    var btnSize = 0.0;
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      btnSize = MediaQuery.of(context).size.height / 3;
+    } else {
+      btnSize = MediaQuery.of(context).size.width / 3;
+    }
+
     return Scaffold(
       key: _scaffoldKey,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              _showButtons = !_showButtons;
-            });
-          },
-          child: Stack(children: [
-            ClockBody(widget._settings),
-            Visibility(
-              visible: _showButtons,
-              child: Positioned(
-                  top: 4,
-                  left: 4,
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.power_settings_new,
-                        color: Colors.black38,
-                      ),
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Exit Waving Clock ?'),
-                          duration: Duration(seconds: 2),
-                          behavior: SnackBarBehavior.floating,
-                          action: SnackBarAction(
-                              label: 'Yes',
-                              onPressed: () {
-                                SystemNavigator.pop();
-                                //print('Quit app');
-                              }),
-                        ));
-                      })),
+      body: GestureDetector(
+        onTap: () {
+          setState(() {
+            _showButtons = !_showButtons;
+          });
+        },
+        child: Stack(children: [
+          ClockBody(widget._settings),
+          if (_showButtons)
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 4,
+                  sigmaY: 4,
+                ),
+                child: Container(
+                  color: Colors.transparent,
+                ),
+              ),
             ),
-            Visibility(
-                visible: _showButtons,
-                child: Positioned(
-                    top: 4,
-                    right: 4,
-                    child: IconButton(
-                        icon: Icon(
-                          Icons.chevron_left_outlined,
-                          color: Colors.black38,
-                        ),
-                        onPressed: () {
-                          _scaffoldKey.currentState!.openEndDrawer();
-                          setState(() => _showButtons = false);
-                        })))
-          ]),
-        ),
+          if (_showButtons) _buildButtonLayer(btnSize),
+        ]),
       ),
       endDrawer: _buildDrader(context),
       endDrawerEnableOpenDragGesture: false,
