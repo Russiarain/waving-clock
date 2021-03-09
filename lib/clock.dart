@@ -128,42 +128,58 @@ class _WavingClockState extends State<WavingClock> {
   }
 
   Widget _buildButtonLayer(double btnSize) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon: Icon(Icons.power_settings_new_rounded),
-                iconSize: btnSize,
-                onPressed: () {
-                  SystemNavigator.pop();
-                },
-              ),
-              Text('Quit')
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon: Icon(Icons.settings),
-                iconSize: btnSize,
-                onPressed: () {
-                  _scaffoldKey.currentState!.openEndDrawer();
-                  setState(() => _showButtons = false);
-                },
-              ),
-              Text('Settings')
-            ],
-          )
-        ],
-      ),
+    var quitBtn = Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: Icon(Icons.power_settings_new_rounded),
+          iconSize: btnSize,
+          onPressed: () {
+            SystemNavigator.pop();
+          },
+        ),
+        Text(
+          'Quit',
+          style: Theme.of(context).textTheme.headline5,
+        )
+      ],
     );
+    var settingsBtn = Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: Icon(Icons.settings),
+          iconSize: btnSize,
+          onPressed: () {
+            _scaffoldKey.currentState!.openEndDrawer();
+            setState(() => _showButtons = false);
+          },
+        ),
+        Text(
+          'Settings',
+          style: Theme.of(context).textTheme.headline5,
+        )
+      ],
+    );
+    return OrientationBuilder(builder: (_, orientation) {
+      if (orientation == Orientation.landscape) {
+        return Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [quitBtn, settingsBtn],
+          ),
+        );
+      } else {
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [quitBtn, settingsBtn],
+          ),
+        );
+      }
+    });
   }
 
   @override
