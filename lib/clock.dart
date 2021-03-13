@@ -129,8 +129,6 @@ class _WavingClockState extends State<WavingClock> {
   }
 
   Widget _buildButtonLayer(double btnSize) {
-    //var deviceOrientation = widget._settings.orientation;
-
     var quitBtn = Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       mainAxisSize: MainAxisSize.min,
@@ -166,6 +164,14 @@ class _WavingClockState extends State<WavingClock> {
         )
       ],
     );
+    void handleOrientationChange(DeviceOrientation deviceOrientation) {
+      SystemChrome.setPreferredOrientations([deviceOrientation]);
+      setState(() {
+        _deviceOrientation = deviceOrientation;
+        _showButtons = false;
+      });
+    }
+
     return OrientationBuilder(builder: (_, orientation) {
       if (orientation == Orientation.landscape) {
         return Center(
@@ -182,33 +188,18 @@ class _WavingClockState extends State<WavingClock> {
                       onPressed: () {
                         if (_deviceOrientation ==
                             DeviceOrientation.landscapeLeft) {
-                          SystemChrome.setPreferredOrientations(
-                              [DeviceOrientation.landscapeRight]);
-                          setState(() {
-                            _deviceOrientation =
-                                DeviceOrientation.landscapeRight;
-                            _showButtons = false;
-                          });
+                          handleOrientationChange(
+                              DeviceOrientation.landscapeRight);
                         } else {
-                          SystemChrome.setPreferredOrientations(
-                              [DeviceOrientation.landscapeLeft]);
-                          setState(() {
-                            _deviceOrientation =
-                                DeviceOrientation.landscapeLeft;
-                            _showButtons = false;
-                          });
+                          handleOrientationChange(
+                              DeviceOrientation.landscapeLeft);
                         }
                       }),
                   IconButton(
                       icon: Icon(Icons.crop_portrait_rounded),
                       iconSize: btnSize * 0.8,
                       onPressed: () {
-                        SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.portraitUp]);
-                        setState(() {
-                          _deviceOrientation = DeviceOrientation.portraitUp;
-                          _showButtons = false;
-                        });
+                        handleOrientationChange(DeviceOrientation.portraitUp);
                       })
                 ],
               ),
@@ -229,23 +220,15 @@ class _WavingClockState extends State<WavingClock> {
                       icon: Icon(Icons.rotate_left_rounded),
                       iconSize: btnSize * 0.8,
                       onPressed: () {
-                        SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.landscapeLeft]);
-                        setState(() {
-                          _deviceOrientation = DeviceOrientation.landscapeLeft;
-                          _showButtons = false;
-                        });
+                        handleOrientationChange(
+                            DeviceOrientation.landscapeLeft);
                       }),
                   IconButton(
                       icon: Icon(Icons.rotate_right_rounded),
                       iconSize: btnSize * 0.8,
                       onPressed: () {
-                        SystemChrome.setPreferredOrientations(
-                            [DeviceOrientation.landscapeRight]);
-                        setState(() {
-                          _deviceOrientation = DeviceOrientation.landscapeRight;
-                          _showButtons = false;
-                        });
+                        handleOrientationChange(
+                            DeviceOrientation.landscapeRight);
                       })
                 ],
               ),
