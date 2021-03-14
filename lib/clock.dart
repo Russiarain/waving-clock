@@ -134,6 +134,7 @@ class _WavingClockState extends State<WavingClock> {
         IconButton(
           icon: Icon(Icons.power_settings_new_rounded),
           iconSize: btnSize,
+          splashRadius: btnSize,
           onPressed: () {
             SystemNavigator.pop();
           },
@@ -151,6 +152,7 @@ class _WavingClockState extends State<WavingClock> {
         IconButton(
           icon: Icon(Icons.settings),
           iconSize: btnSize,
+          splashRadius: btnSize,
           onPressed: () {
             _scaffoldKey.currentState!.openEndDrawer();
             setState(() => _showButtons = false);
@@ -170,72 +172,75 @@ class _WavingClockState extends State<WavingClock> {
       });
     }
 
-    return OrientationBuilder(builder: (_, orientation) {
-      if (orientation == Orientation.landscape) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              quitBtn,
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.upload_rounded),
-                      iconSize: btnSize * 0.8,
-                      onPressed: () {
-                        if (_deviceOrientation ==
-                            DeviceOrientation.landscapeLeft) {
-                          handleOrientationChange(
-                              DeviceOrientation.landscapeRight);
-                        } else {
+    return Material(
+      color: Colors.transparent,
+      child: OrientationBuilder(builder: (_, orientation) {
+        if (orientation == Orientation.landscape) {
+          return Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                quitBtn,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.upload_rounded),
+                        iconSize: btnSize * 0.8,
+                        onPressed: () {
+                          if (_deviceOrientation ==
+                              DeviceOrientation.landscapeLeft) {
+                            handleOrientationChange(
+                                DeviceOrientation.landscapeRight);
+                          } else {
+                            handleOrientationChange(
+                                DeviceOrientation.landscapeLeft);
+                          }
+                        }),
+                    IconButton(
+                        icon: Icon(Icons.crop_portrait_rounded),
+                        iconSize: btnSize * 0.8,
+                        onPressed: () {
+                          handleOrientationChange(DeviceOrientation.portraitUp);
+                        })
+                  ],
+                ),
+                settingsBtn
+              ],
+            ),
+          );
+        } else {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                quitBtn,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                        icon: Icon(Icons.rotate_left_rounded),
+                        iconSize: btnSize * 0.8,
+                        onPressed: () {
                           handleOrientationChange(
                               DeviceOrientation.landscapeLeft);
-                        }
-                      }),
-                  IconButton(
-                      icon: Icon(Icons.crop_portrait_rounded),
-                      iconSize: btnSize * 0.8,
-                      onPressed: () {
-                        handleOrientationChange(DeviceOrientation.portraitUp);
-                      })
-                ],
-              ),
-              settingsBtn
-            ],
-          ),
-        );
-      } else {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              quitBtn,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                      icon: Icon(Icons.rotate_left_rounded),
-                      iconSize: btnSize * 0.8,
-                      onPressed: () {
-                        handleOrientationChange(
-                            DeviceOrientation.landscapeLeft);
-                      }),
-                  IconButton(
-                      icon: Icon(Icons.rotate_right_rounded),
-                      iconSize: btnSize * 0.8,
-                      onPressed: () {
-                        handleOrientationChange(
-                            DeviceOrientation.landscapeRight);
-                      })
-                ],
-              ),
-              settingsBtn
-            ],
-          ),
-        );
-      }
-    });
+                        }),
+                    IconButton(
+                        icon: Icon(Icons.rotate_right_rounded),
+                        iconSize: btnSize * 0.8,
+                        onPressed: () {
+                          handleOrientationChange(
+                              DeviceOrientation.landscapeRight);
+                        })
+                  ],
+                ),
+                settingsBtn
+              ],
+            ),
+          );
+        }
+      }),
+    );
   }
 
   @override
