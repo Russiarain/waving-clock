@@ -71,24 +71,22 @@ class _WavingClockState extends State<WavingClock> {
               ),
               trailing: Checkbox(
                   value: widget._settings.showAmPm,
-                  onChanged: widget._settings.is24HourFormat
+                  onChanged: widget._settings.is24HourFormat ||
+                          _deviceOrientation == DeviceOrientation.portraitUp
                       ? null
                       : (val) => widget._settings.showAmPm = val!),
             ),
-            OrientationBuilder(builder: (context, orientation) {
-              return ListTile(
-                  title: Text(
-                    'Show time delimiter',
-                    //style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  trailing: Checkbox(
-                    value: widget._settings.showTimeDelimiter,
-                    onChanged: orientation == Orientation.portrait
-                        ? null
-                        : (value) =>
-                            widget._settings.showTimeDelimiter = value!,
-                  ));
-            }),
+            ListTile(
+                title: Text(
+                  'Show time delimiter',
+                  //style: Theme.of(context).textTheme.bodyText1,
+                ),
+                trailing: Checkbox(
+                  value: widget._settings.showTimeDelimiter,
+                  onChanged: _deviceOrientation == DeviceOrientation.portraitUp
+                      ? null
+                      : (value) => widget._settings.showTimeDelimiter = value!,
+                )),
             ListTile(
               title: Text(
                 'Theme',
