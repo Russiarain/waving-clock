@@ -74,8 +74,11 @@ class _ClockBodyState extends State<ClockBody> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final waveHeight =
-        (screenSize.width * _dateTime.second / 59).floorToDouble();
+    final ori = MediaQuery.of(context).orientation;
+    final waveHeight = (ori == Orientation.landscape
+            ? screenSize.width
+            : screenSize.height * _dateTime.second / 59)
+        .floorToDouble();
     return Stack(
       children: [
         Positioned.fill(child: AnimatedBackgroud(kThemeof[_theme]!)),
