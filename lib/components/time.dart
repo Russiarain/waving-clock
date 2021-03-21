@@ -22,49 +22,48 @@ class TimeLayer extends StatelessWidget {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final fontSize = 0.4 * height;
-    return Positioned(
-      top: 0.06 * height,
-      bottom: 0.06 * height,
-      left: 4,
-      right: 4,
-      child: Center(
-        child: Text(_getTimeString(),
-            style: TextStyle(
-              fontSize: fontSize,
-              color: _fontColor,
-            )),
-      ),
-    );
-  }
-}
+  String _getVerticalTimeString() =>
+      DateFormat(_is24HourFormat ? 'HH\nmm' : 'hh\nmm').format(_time);
 
-class DateLayer extends StatelessWidget {
-  final DateTime _time;
-  final Color _fontColor;
-  DateLayer(this._time, this._fontColor);
-  String _getTimeString() {
-    return DateFormat('EEEEEEEE , MMM d').format(_time);
-  }
+  String _getDateString() => DateFormat('EEEEEEEE , MMM d').format(_time);
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final fontSize = 0.1 * height;
-    return Positioned(
-      bottom: 0.05 * height,
-      left: 4,
-      right: 4,
-      child: Center(
-        child: Text(_getTimeString(),
-            style: TextStyle(
-              fontSize: fontSize,
-              color: _fontColor,
-            )),
-      ),
-    );
+    final screenHeight = MediaQuery.of(context).size.height;
+    return Positioned.fill(
+        child: OrientationBuilder(
+            builder: (context, orientation) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                        flex: 4,
+                        child: Center(
+                          child: Text(
+                            orientation == Orientation.landscape
+                                ? _getTimeString()
+                                : _getVerticalTimeString(),
+                            style: TextStyle(
+                                color: _fontColor,
+                                fontSize: orientation == Orientation.landscape
+                                    ? screenHeight * 0.8 * 0.5
+                                    : screenHeight * 0.8 * 0.3),
+                          ),
+                        )),
+                    Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: Text(
+                            _getDateString(),
+                            style: TextStyle(
+                                color: _fontColor,
+                                fontSize: orientation == Orientation.landscape
+                                    ? screenHeight * 0.2 * 0.7
+                                    : screenHeight * 0.2 * 0.2),
+                          ),
+                        ))
+                  ],
+                )));
   }
 }
