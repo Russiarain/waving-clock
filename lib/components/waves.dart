@@ -22,7 +22,11 @@ class SineWave extends StatelessWidget {
   final double offset;
   final Color waveColor;
 
-  SineWave({required this.height, this.speed = 1.0, required this.waveColor, this.offset = 0.0});
+  SineWave(
+      {required this.height,
+      this.speed = 1.0,
+      required this.waveColor,
+      this.offset = 0.0});
 
   @override
   Widget build(BuildContext context) {

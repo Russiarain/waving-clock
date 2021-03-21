@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waving_clock/theme.dart';
 
+import 'theme.dart';
 import 'clock.dart';
 import 'settings.dart';
 
@@ -10,27 +11,25 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  Future<SharedPreferences> _getPreference() {
-    return Future.delayed(Duration(milliseconds: 600))
-        .then<SharedPreferences>((_) => SharedPreferences.getInstance());
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Initialize device orientation with landscape left
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+
     return MaterialApp(
       title: 'Waving Clock',
       theme: lightTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<SharedPreferences>(
-        future: _getPreference(),
+        future: SharedPreferences.getInstance(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return WavingClock(ClockSettings(snapshot.data!)..initSettings());
           }
           return Container(
-              color: Colors.blueGrey[200],
-              child: Center(child: CircularProgressIndicator()));
+            color: Colors.blueGrey[200],
+          );
         },
       ),
     );

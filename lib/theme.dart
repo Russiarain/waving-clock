@@ -63,7 +63,7 @@ WavingTheme _buildBlueTheme() {
 }
 
 final lightTheme = ThemeData(
+  iconTheme: IconThemeData(color: Colors.black54),
+  splashColor: Colors.deepPurpleAccent[700],
   fontFamily: 'Lato',
-  // textTheme: TextTheme(
-  //     headline6: TextStyle(fontSize: 24), subtitle1: TextStyle(fontSize: 4))
 );

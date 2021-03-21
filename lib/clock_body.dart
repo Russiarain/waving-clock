@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:waving_clock/components/background.dart';
-import 'package:waving_clock/components/time.dart';
-import 'package:waving_clock/settings.dart';
-import 'package:waving_clock/theme.dart';
 
+import 'components/background.dart';
+import 'components/time.dart';
 import 'components/waves.dart';
+import 'settings.dart';
+import 'theme.dart';
 
 class ClockBody extends StatefulWidget {
   final ClockSettings settings;
@@ -74,8 +74,11 @@ class _ClockBodyState extends State<ClockBody> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final waveHeight =
-        (screenSize.width * _dateTime.second / 59).floorToDouble();
+    final ori = MediaQuery.of(context).orientation;
+    final waveHeight = (ori == Orientation.landscape
+            ? screenSize.width
+            : screenSize.height * _dateTime.second / 59)
+        .floorToDouble();
     return Stack(
       children: [
         Positioned.fill(child: AnimatedBackgroud(kThemeof[_theme]!)),
@@ -84,7 +87,6 @@ class _ClockBodyState extends State<ClockBody> {
         waveLayer(waveHeight, 0.66 * pi, kThemeof[_theme]!.waveColor),
         TimeLayer(_dateTime, kThemeof[_theme]!.fontColor, _showTimeDelimiter,
             _is24HourFormat, _showAmPm),
-        DateLayer(_dateTime, kThemeof[_theme]!.fontColor)
       ],
     );
   }
